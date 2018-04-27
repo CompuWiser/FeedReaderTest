@@ -116,19 +116,16 @@ $(function() {
         let newerFeed;
 
         beforeEach(function (done) {
-            $('.feed').empty();
             loadFeed(0, function () {
                 olderFeed = $('.feed').html();
-                //console.log('older feed: ');
-                //console.log(olderFeed);
-                loadFeed(1, done);
+                loadFeed(1, function () {
+                    newerFeed = $('.feed').html();
+                    done();
+                });
             });
         });
 
-        it("Content changes after loading finishes", function (done) {
-            newerFeed = $('.feed').html();
-            //console.log('newer feed: ');
-            //console.log(newerFeed);
+        it("Content displayed changes when new feed is loaded", function (done) {
             expect(olderFeed).not.toBe(newerFeed);
             done();
         });

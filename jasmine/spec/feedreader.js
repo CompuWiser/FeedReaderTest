@@ -27,7 +27,7 @@ $(function() {
         });
 
 
-        /* TODO: Write a test that loops through each feed
+        /* Write a test that loops through each feed
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
@@ -39,7 +39,7 @@ $(function() {
             expect(hasURL).toBe(true);
         });
 
-        /* TODO: Write a test that loops through each feed
+        /* Write a test that loops through each feed
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
@@ -53,50 +53,84 @@ $(function() {
 
     });
 
-    /* TODO: Write a new test suite named "The menu" */
+    /* Write a new test suite named "The menu" */
     describe("The Menu", function () {
-        /* TODO: Write a test that ensures the menu element is
+        /* Write a test that ensures the menu element is
          * hidden by default. You'll have to analyze the HTML and
          * the CSS to determine how we're performing the
          * hiding/showing of the menu element.
          */
         it("Menu is hidden by default", function () {
-            let body = document.querySelector("body");
-            expect(body).toHaveClass("menu-hidden");
+            let body = $("body");
+            expect(body.hasClass("menu-hidden")).toBe(true);
         });
-         /* TODO: Write a test that ensures the menu changes
+         /* Write a test that ensures the menu changes
           * visibility when the menu icon is clicked. This test
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
         it("Menu changes visibility on click", function () {
-            expect().nothing();
+            let button = $(".menu-icon-link");
+            let body = $("body");
+
+            button.trigger("click");
+            expect(body.hasClass("menu-hidden")).toBe(false);
+
+            button.trigger("click");
+            expect(body.hasClass("menu-hidden")).toBe(true);
         });
     });
         
 
-    /* TODO: Write a new test suite named "Initial Entries" */
+    /* Write a new test suite named "Initial Entries" */
     describe("Initial Entries", function () {
-        /* TODO: Write a test that ensures when the loadFeed
+        /* Write a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
          * a single .entry element within the .feed container.
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
-        it("At least one entry is loaded", function () {
-            expect().nothing();
+        beforeEach(function (done) {
+            loadFeed(0, done);
+        });
+
+        it("At least one entry is loaded", function (done) {
+            let entry = $('.entry');
+            let feed = $('.feed');
+
+            expect(feed.children().length).toBeGreaterThan(0);
+            expect(entry.length).toBeGreaterThan(0);
+            done();
         });
     });
         
 
-    /* TODO: Write a new test suite named "New Feed Selection" */
+    /* Write a new test suite named "New Feed Selection" */
     describe("New Feed Selection", function () {
-        /* TODO: Write a test that ensures when a new feed is loaded
+        /* Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-        it("Content changes after loading finishes", function () {
-            expect().nothing();
+
+        let olderFeed;
+        let newerFeed;
+
+        beforeEach(function (done) {
+            $('.feed').empty();
+            loadFeed(0, function () {
+                olderFeed = $('.feed').html();
+                //console.log('older feed: ');
+                //console.log(olderFeed);
+                loadFeed(1, done);
+            });
+        });
+
+        it("Content changes after loading finishes", function (done) {
+            newerFeed = $('.feed').html();
+            //console.log('newer feed: ');
+            //console.log(newerFeed);
+            expect(olderFeed).not.toBe(newerFeed);
+            done();
         });
     });
         

@@ -8,12 +8,12 @@
  * since some of these tests may require DOM elements. We want
  * to ensure they don't run until the DOM is ready.
  */
-$(function() {
+$(function () {
     /* This is our first test suite - a test suite just contains
-    * a related set of tests. This suite is all about the RSS
-    * feeds definitions, the allFeeds variable in our application.
-    */
-    describe('RSS Feeds', function() {
+     * a related set of tests. This suite is all about the RSS
+     * feeds definitions, the allFeeds variable in our application.
+     */
+    describe("RSS Feeds", function () {
         /* This is our first test - it tests to make sure that the
          * allFeeds variable has been defined and that it is not
          * empty. Experiment with this before you get started on
@@ -21,7 +21,7 @@ $(function() {
          * allFeeds in app.js to be an empty array and refresh the
          * page?
          */
-        it('allFeed are defined', function() {
+        it("allFeed are defined", function () {
             expect(allFeeds).toBeDefined();
             expect(allFeeds.length).not.toBe(0);
         });
@@ -64,11 +64,11 @@ $(function() {
             let body = $("body");
             expect(body.hasClass("menu-hidden")).toBe(true);
         });
-         /* Write a test that ensures the menu changes
-          * visibility when the menu icon is clicked. This test
-          * should have two expectations: does the menu display when
-          * clicked and does it hide when clicked again.
-          */
+        /* Write a test that ensures the menu changes
+         * visibility when the menu icon is clicked. This test
+         * should have two expectations: does the menu display when
+         * clicked and does it hide when clicked again.
+         */
         it("Menu changes visibility on click", function () {
             let button = $(".menu-icon-link");
             let body = $("body");
@@ -80,7 +80,7 @@ $(function() {
             expect(body.hasClass("menu-hidden")).toBe(true);
         });
     });
-        
+
 
     /* Write a new test suite named "Initial Entries" */
     describe("Initial Entries", function () {
@@ -95,15 +95,15 @@ $(function() {
         });
 
         it("At least one entry is loaded", function (done) {
-            let entry = $('.entry');
-            let feed = $('.feed');
+            let entry = $(".entry");
+            let feed = $(".feed");
 
             expect(feed.children().length).toBeGreaterThan(0);
             expect(entry.length).toBeGreaterThan(0);
             done();
         });
     });
-        
+
 
     /* Write a new test suite named "New Feed Selection" */
     describe("New Feed Selection", function () {
@@ -117,9 +117,9 @@ $(function() {
 
         beforeEach(function (done) {
             loadFeed(0, function () {
-                olderFeed = $('.feed').html();
+                olderFeed = $(".feed").html();
                 loadFeed(1, function () {
-                    newerFeed = $('.feed').html();
+                    newerFeed = $(".feed").html();
                     done();
                 });
             });
@@ -130,5 +130,5 @@ $(function() {
             done();
         });
     });
-        
+
 }());

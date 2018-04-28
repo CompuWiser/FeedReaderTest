@@ -95,11 +95,9 @@ $(function () {
         });
 
         it("At least one entry is loaded", function (done) {
-            let entry = $(".entry");
-            let feed = $(".feed");
+            let feed = $(".feed .entry");
 
-            expect(feed.children().length).toBeGreaterThan(0);
-            expect(entry.length).toBeGreaterThan(0);
+            expect(feed.length).toBeGreaterThan(0);
             done();
         });
     });
